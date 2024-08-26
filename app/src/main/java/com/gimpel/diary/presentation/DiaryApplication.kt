@@ -1,4 +1,4 @@
-package com.gimpel.diary
+package com.gimpel.diary.presentation
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

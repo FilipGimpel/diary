@@ -35,3 +35,4 @@ app/google-services.json
 # default 
 .DS_Store
 local.properties
+secrets.properties
