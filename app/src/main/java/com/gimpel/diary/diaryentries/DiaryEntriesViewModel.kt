@@ -4,6 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gimpel.diary.data.DiaryEntry
 import com.gimpel.diary.data.FirestoreRepository
+import com.gimpel.diary.detail.AddGeofenceUseCase
+import com.gimpel.diary.detail.SendNotificationUseCase
+import com.google.android.gms.location.Geofence
+import com.google.android.gms.location.GeofencingRequest
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -14,7 +18,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DiaryEntriesViewModel @Inject constructor(
-    private val firestoreRepository: FirestoreRepository
+    private val firestoreRepository: FirestoreRepository,
+    private val addGeofenceUseCase: AddGeofenceUseCase
 ) : ViewModel() {
     private val mutableUiState = MutableStateFlow(UiState())
     val uiState = mutableUiState.asStateFlow()
@@ -26,9 +31,15 @@ class DiaryEntriesViewModel @Inject constructor(
                     populate()
                 } else {
                     mutableUiState.value = uiState.value.copy(entries = entries, isLoading = false)
+
+                    addGeoFences(entries)
                 }
             }
         }
+    }
+
+    fun addGeoFences(entries: List<DiaryEntry>) {
+        addGeofenceUseCase(entries)
     }
 
     suspend fun populate() { // TODO MOVE THIS TO STRRINGS.XML

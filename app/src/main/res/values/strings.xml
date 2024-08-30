@@ -5,5 +5,9 @@
     <string name="label_edit">Edit</string>
     <string name="content_description_save">Save changes</string>
     <string name="content_description_back">Go back</string>
+    <string name="geofence_alert_notification_title">Geofence alert!</string>
+    <string name="geofence_alert_notification_message">You have entered the location of %1$s entry</string>
+    <string name="notification_channel_geofence_description">Channel for geofence notifications</string>
+    <string name="notification_channel_geofence_name">Geofence Channel</string>
 
 </resources>
