@@ -1,4 +1,4 @@
-package com.gimpel.diary.detail
+package com.gimpel.diary.domain
 
 import android.Manifest
 import android.app.PendingIntent
@@ -6,7 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.core.app.ActivityCompat
-import com.gimpel.diary.data.DiaryEntry
+import com.gimpel.diary.data.model.DiaryEntry
 import com.gimpel.diary.geofence.GeofenceBroadcastReceiver
 import com.google.android.gms.location.Geofence
 import com.google.android.gms.location.GeofencingRequest

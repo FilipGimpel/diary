@@ -1,4 +1,4 @@
-package com.gimpel.diary
+package com.gimpel.diary.presentation.map
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -13,6 +13,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.gimpel.diary.ui.BottomNavBar
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.PermissionStatus
 import com.google.accompanist.permissions.rememberPermissionState
@@ -90,7 +91,6 @@ fun MapScreen(
     })
 }
 
-// todo move it somewhere reasonable
 fun Date.toReadable(): String {
     return SimpleDateFormat("dd MMMM yyyy, hh:mm", Locale.getDefault()).format(this)
 }

@@ -1,4 +1,4 @@
-package com.gimpel.diary.detail
+package com.gimpel.diary.presentation.detail
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -36,19 +36,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.gimpel.diary.R
-import com.gimpel.diary.data.DiaryEntry
 
 @Composable
 fun DetailScreen(
@@ -96,7 +92,7 @@ fun DetailScreen(
         },
         onImageCaptured = { bitmap ->
             viewModel.uploadBitmap(bitmap)
-        }// todo delete old picture from firebase if we add new
+        }
     )
 }
 
@@ -150,21 +146,23 @@ fun DetailContent(
         ) {
             OutlinedTextField(value = uiState.title,
                 onValueChange =  onTitleChange,
-                label = { Text(text = "Enter your diary entry title") },
+                label = { Text(text = stringResource(R.string.diary_entry_title_hint)) },
                 modifier = Modifier
                     .fillMaxWidth()
             )
             Spacer(modifier = Modifier.height(8.dp))
             OutlinedTextField(value = uiState.content,
                 onValueChange = onContentChange,
-                label = { Text(text = "Enter your diary entry content") },
+                label = { Text(text = stringResource(R.string.diary_entry_content_hint)) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(9f)
             )
             Spacer(modifier = Modifier.height(8.dp))
             Row(
-                modifier = Modifier.fillMaxWidth().weight(1f),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f),
                 horizontalArrangement = Arrangement.SpaceBetween, // Distribute space between items
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -172,17 +170,19 @@ fun DetailContent(
                 Image(
                     modifier = Modifier.weight(1f), // Allow image to occupy available space
                     painter = rememberAsyncImagePainter(model = uiState.imageUri),
-                    contentDescription = "Captured Image"
+                    contentDescription = stringResource(R.string.captured_image)
                 )
 
                 Button(onClick = { takePictureLauncher.launch() }) {
-                    if ( uiState.imageUri.isEmpty()) Text("Take Picture") else Text("Retake Picture")
+                    if ( uiState.imageUri.isEmpty()) Text(stringResource(R.string.take_picture)) else Text(
+                        stringResource(R.string.retake_picture)
+                    )
                 } // todo delete picture button
             }
             Spacer(modifier = Modifier.height(8.dp))
             Row {
                 Icon(Icons.Filled.LocationOn, contentDescription = null, modifier = Modifier.padding(end = 8.dp))
-                Text(text = "Location: ${uiState.locationName}")
+                Text(text = stringResource(R.string.location, uiState.locationName))
             }
 
             Spacer(modifier = Modifier.height(8.dp))

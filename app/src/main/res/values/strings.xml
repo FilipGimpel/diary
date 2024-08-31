@@ -9,5 +9,12 @@
     <string name="geofence_alert_notification_message">You have entered the location of %1$s entry</string>
     <string name="notification_channel_geofence_description">Channel for geofence notifications</string>
     <string name="notification_channel_geofence_name">Geofence Channel</string>
+    <string name="location_unknown">Location Unknown</string>
+    <string name="diary_entry_title_hint">Enter your diary entry title</string>
+    <string name="diary_entry_content_hint">Enter your diary entry content</string>
+    <string name="captured_image">Captured Image</string>
+    <string name="take_picture">Take Picture</string>
+    <string name="retake_picture">Retake Picture</string>
+    <string name="location">Location: %1$s</string>
 
 </resources>

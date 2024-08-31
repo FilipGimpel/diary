@@ -1,9 +1,9 @@
-package com.gimpel.diary.presentation
+package com.gimpel.diary.presentation.navigation
 
-import com.gimpel.diary.presentation.DiaryDestinationsArgs.DETAIL_ID_ARG
-import com.gimpel.diary.presentation.DiaryScreens.DETAIL_SCREEN
-import com.gimpel.diary.presentation.DiaryScreens.LIST_SCREEN
-import com.gimpel.diary.presentation.DiaryScreens.MAP_SCREEN
+import com.gimpel.diary.presentation.navigation.DiaryDestinationsArgs.DETAIL_ID_ARG
+import com.gimpel.diary.presentation.navigation.DiaryScreens.DETAIL_SCREEN
+import com.gimpel.diary.presentation.navigation.DiaryScreens.LIST_SCREEN
+import com.gimpel.diary.presentation.navigation.DiaryScreens.MAP_SCREEN
 
 object DiaryScreens {
     const val LIST_SCREEN = "list"

@@ -1,4 +1,4 @@
-package com.gimpel.diary.presentation
+package com.gimpel.diary.presentation.navigation
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
@@ -9,10 +9,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.gimpel.diary.MapScreen
-import com.gimpel.diary.detail.DetailScreen
-import com.gimpel.diary.diaryentries.DiaryEntriesListScreen
-import com.gimpel.diary.presentation.DiaryDestinationsArgs.DETAIL_ID_ARG
+import com.gimpel.diary.presentation.map.MapScreen
+import com.gimpel.diary.presentation.detail.DetailScreen
+import com.gimpel.diary.presentation.list.DiaryEntriesListScreen
+import com.gimpel.diary.presentation.navigation.DiaryDestinationsArgs.DETAIL_ID_ARG
 
 
 @Composable

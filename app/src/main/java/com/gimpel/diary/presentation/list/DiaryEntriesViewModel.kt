@@ -1,13 +1,10 @@
-package com.gimpel.diary.diaryentries
+package com.gimpel.diary.presentation.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gimpel.diary.data.DiaryEntry
+import com.gimpel.diary.data.model.DiaryEntry
 import com.gimpel.diary.data.FirestoreRepository
-import com.gimpel.diary.detail.AddGeofenceUseCase
-import com.gimpel.diary.detail.SendNotificationUseCase
-import com.google.android.gms.location.Geofence
-import com.google.android.gms.location.GeofencingRequest
+import com.gimpel.diary.domain.AddGeofenceUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -42,7 +39,7 @@ class DiaryEntriesViewModel @Inject constructor(
         addGeofenceUseCase(entries)
     }
 
-    suspend fun populate() { // TODO MOVE THIS TO STRRINGS.XML
+    suspend fun populate() {
         val entries = listOf(
             DiaryEntry(
                 title = "Exploring the Old Town",

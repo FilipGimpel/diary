@@ -1,4 +1,4 @@
-package com.gimpel.diary
+package com.gimpel.diary.ui
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.List
@@ -14,7 +14,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.gimpel.diary.presentation.DiaryDestinations
+import com.gimpel.diary.R
+import com.gimpel.diary.presentation.navigation.DiaryDestinations
 
 @Composable
 fun BottomNavBar(

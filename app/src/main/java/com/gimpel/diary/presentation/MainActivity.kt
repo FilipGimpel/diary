@@ -7,6 +7,7 @@ import androidx.activity.compose.setContent
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
+import com.gimpel.diary.presentation.navigation.DiaryApp
 import com.gimpel.diary.ui.theme.DiaryTheme
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint

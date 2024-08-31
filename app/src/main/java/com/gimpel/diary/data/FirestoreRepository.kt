@@ -1,5 +1,9 @@
 package com.gimpel.diary.data
 
+import com.gimpel.diary.data.model.DiaryEntry
+import com.gimpel.diary.data.model.FirestoreDiaryEntry
+import com.gimpel.diary.data.model.toDiaryEntry
+import com.gimpel.diary.data.model.toFirestoreDiaryEntry
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.snapshots

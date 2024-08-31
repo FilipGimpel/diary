@@ -1,4 +1,4 @@
-package com.gimpel.diary.detail
+package com.gimpel.diary.data
 
 import android.annotation.SuppressLint
 import android.content.Context

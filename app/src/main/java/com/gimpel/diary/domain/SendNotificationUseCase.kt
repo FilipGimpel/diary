@@ -1,4 +1,4 @@
-package com.gimpel.diary.detail
+package com.gimpel.diary.domain
 
 import android.app.NotificationChannel
 import android.app.NotificationManager

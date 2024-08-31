@@ -1,11 +1,9 @@
-package com.gimpel.diary
+package com.gimpel.diary.presentation.map
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gimpel.diary.data.DiaryEntry
+import com.gimpel.diary.data.model.DiaryEntry
 import com.gimpel.diary.data.FirestoreRepository
-import com.gimpel.diary.detail.LocationRepository
-import com.google.android.gms.maps.model.LatLng
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

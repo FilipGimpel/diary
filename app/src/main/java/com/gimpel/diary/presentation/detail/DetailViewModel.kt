@@ -1,21 +1,21 @@
-package com.gimpel.diary.detail
+package com.gimpel.diary.presentation.detail
 
 import android.graphics.Bitmap
 import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gimpel.diary.data.DiaryEntry
+import com.gimpel.diary.data.model.DiaryEntry
 import com.gimpel.diary.data.FirebaseStorageRepository
 import com.gimpel.diary.data.FirestoreRepository
-import com.gimpel.diary.presentation.DiaryDestinationsArgs.ADD
-import com.gimpel.diary.presentation.DiaryDestinationsArgs.DETAIL_ID_ARG
-import com.google.firebase.storage.FirebaseStorage
+import com.gimpel.diary.domain.GetCurrentLocationNameUseCase
+import com.gimpel.diary.domain.GetLocationFromCoordinatesUseCase
+import com.gimpel.diary.presentation.navigation.DiaryDestinationsArgs.ADD
+import com.gimpel.diary.presentation.navigation.DiaryDestinationsArgs.DETAIL_ID_ARG
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import java.io.ByteArrayOutputStream
 import javax.inject.Inject
 
 @HiltViewModel
