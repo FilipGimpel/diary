@@ -50,7 +50,8 @@ class DiaryEntriesViewModel @Inject constructor(
                 locationLatitude = 52.247256,
                 locationLongitude = 21.013998,
                 date = createDate(2024, 8, 1),
-                locationName = "plac Zamkowy 4, 00-277 Warszawa, Polska"
+                locationName = "plac Zamkowy 4, 00-277 Warszawa, Polska",
+                imageUri = "https://firebasestorage.googleapis.com/v0/b/diary-10c59.appspot.com/o/buildin%2Fmiasto.png?alt=media&token=d7f283be-6612-44a9-aa20-fe63cf836775"
             ),
             DiaryEntry(
                 title = "Reflecting at the Warsaw Uprising Museum",
@@ -58,7 +59,8 @@ class DiaryEntriesViewModel @Inject constructor(
                 locationLatitude = 52.232889,
                 locationLongitude = 20.980442,
                 date = createDate(2024, 8, 2),
-                locationName = "Muzeum Powstania Warszawskiego, 00-844 Warszawa, Polska"
+                locationName = "Muzeum Powstania Warszawskiego, 00-844 Warszawa, Polska",
+                imageUri = "https://firebasestorage.googleapis.com/v0/b/diary-10c59.appspot.com/o/buildin%2Fpowstanie.png?alt=media&token=ec598f4c-801f-4320-8268-3fd9fc6ba102"
             ),
             DiaryEntry(
                 title = "A Peaceful Stroll in Łazienki Park",
@@ -66,7 +68,8 @@ class DiaryEntriesViewModel @Inject constructor(
                 locationLatitude = 52.212777,
                 locationLongitude = 21.035945,
                 date = createDate(2024, 8, 3),
-                locationName = "Aleje Ujazdowskie 6, 00-001 Warszawa, Polska"
+                locationName = "Aleje Ujazdowskie 6, 00-001 Warszawa, Polska",
+                imageUri = "https://firebasestorage.googleapis.com/v0/b/diary-10c59.appspot.com/o/buildin%2Flazienki.png?alt=media&token=70606cb7-21ca-4253-bc42-292d8c99a883"
             ),
             DiaryEntry(
                 title = "Discovering the Neon Museum",
@@ -74,7 +77,8 @@ class DiaryEntriesViewModel @Inject constructor(
                 locationLatitude = 52.244086,
                 locationLongitude = 21.047574,
                 date = createDate(2024, 8, 4),
-                locationName = "aleja Zieleniecka 6/8, 03-727 Warszawa, Polska"
+                locationName = "aleja Zieleniecka 6/8, 03-727 Warszawa, Polska",
+                imageUri = "https://firebasestorage.googleapis.com/v0/b/diary-10c59.appspot.com/o/buildin%2Fneon.png?alt=media&token=8231e155-c713-493d-949d-15d77d260a9b"
             ),
             DiaryEntry(
                 title = "Evening at the Palace of Culture and Science",
@@ -82,7 +86,8 @@ class DiaryEntriesViewModel @Inject constructor(
                 locationLatitude = 52.231838,
                 locationLongitude = 21.006724,
                 date = createDate(2024, 8, 5),
-                locationName = "plac Defilad 1, 00-901 Warszawa, Polska"
+                locationName = "plac Defilad 1, 00-901 Warszawa, Polska",
+                imageUri = "https://firebasestorage.googleapis.com/v0/b/diary-10c59.appspot.com/o/buildin%2Fpalac.png?alt=media&token=7e4f9d43-422e-4b3c-8cc4-329a4be0b202"
             )
         )
 

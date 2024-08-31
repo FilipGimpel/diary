@@ -1,17 +1,21 @@
 package com.gimpel.diary.detail
 
+import android.graphics.Bitmap
 import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gimpel.diary.data.DiaryEntry
+import com.gimpel.diary.data.FirebaseStorageRepository
 import com.gimpel.diary.data.FirestoreRepository
 import com.gimpel.diary.presentation.DiaryDestinationsArgs.ADD
 import com.gimpel.diary.presentation.DiaryDestinationsArgs.DETAIL_ID_ARG
+import com.google.firebase.storage.FirebaseStorage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import java.io.ByteArrayOutputStream
 import javax.inject.Inject
 
 @HiltViewModel
@@ -19,6 +23,7 @@ class DetailViewModel @Inject constructor(
     private val getLocationNameUseCase: GetCurrentLocationNameUseCase,
     private val getLocationFromCoordinatesUseCase: GetLocationFromCoordinatesUseCase,
     private val diaryEntryRepository: FirestoreRepository,
+    private val firebaseStorageRepository: FirebaseStorageRepository,
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -41,7 +46,8 @@ class DetailViewModel @Inject constructor(
                     content = diaryEntry.content,
                     locationLatitude = diaryEntry.locationLatitude,
                     locationLongitude = diaryEntry.locationLongitude,
-                    locationName = diaryEntry.locationName
+                    locationName = diaryEntry.locationName,
+                    imageUri = diaryEntry.imageUri
                 )
 
                 if (diaryEntry.locationName.isEmpty()) {
@@ -65,10 +71,6 @@ class DetailViewModel @Inject constructor(
                             locationName = location.locationName
                         )
                 }
-            } else {
-                getLocationFromCoordinatesUseCase(uiState.value.locationLatitude, uiState.value.locationLongitude).collect { locationName ->
-                    mutableUiState.value = mutableUiState.value.copy(locationName = locationName)
-                }
             }
         }
     }
@@ -81,6 +83,13 @@ class DetailViewModel @Inject constructor(
         mutableUiState.value = mutableUiState.value.copy(content = newText)
     }
 
+    fun uploadBitmap(bitmap: Bitmap) {
+        viewModelScope.launch {
+            val uri = firebaseStorageRepository.uploadBitmapAndReturnUri(bitmap, "images/${System.currentTimeMillis()}.jpg").getOrDefault("")
+            mutableUiState.value = mutableUiState.value.copy(imageUri = uri)
+        }
+    }
+
     fun saveCurrentEntry() {
         viewModelScope.launch {
             val diaryEntry = DiaryEntry(
@@ -89,7 +98,8 @@ class DetailViewModel @Inject constructor(
                 content = uiState.value.content,
                 locationLatitude = uiState.value.locationLatitude,
                 locationLongitude = uiState.value.locationLongitude,
-                locationName = uiState.value.locationName
+                locationName = uiState.value.locationName,
+                imageUri = uiState.value.imageUri
             )
 
             val result = diaryEntryRepository.addOrUpdateDiaryEntry(diaryEntry)
@@ -113,6 +123,7 @@ data class UiState( // todo make uistate a sealed class of type edit/add
     val content: String = "",
     val locationLatitude: Double = 0.0,
     val locationLongitude: Double = 0.0,
-    val locationName: String = ""
+    val locationName: String = "",
+    val imageUri: String = ""
 )
 

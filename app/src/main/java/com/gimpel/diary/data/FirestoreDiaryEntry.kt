@@ -9,5 +9,6 @@ data class FirestoreDiaryEntry(
     val content: String = "",
     val date: Timestamp = Timestamp.now(),
     val location: GeoPoint = GeoPoint(0.0, 0.0),
-    val locationName: String = ""
+    val locationName: String = "",
+    val imageUri: String = "",
 )

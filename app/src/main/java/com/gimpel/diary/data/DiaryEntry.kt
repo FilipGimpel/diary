@@ -12,6 +12,7 @@ data class DiaryEntry(
     val locationLatitude: Double = 0.0,
     val locationLongitude: Double = 0.0,
     val locationName: String = "",
+    val imageUri: String = "",
 )
 
 //todo move to separate
@@ -22,7 +23,8 @@ fun DiaryEntry.toFirestoreDiaryEntry(id: String = ""): FirestoreDiaryEntry {
         content = this.content,
         date = Timestamp(this.date),
         location = GeoPoint(this.locationLatitude, this.locationLongitude),
-        locationName = this.locationName
+        locationName = this.locationName,
+        imageUri = this.imageUri
     )
 }
 
@@ -34,6 +36,7 @@ fun FirestoreDiaryEntry.toDiaryEntry(): DiaryEntry {
         date = this.date.toDate(),
         locationLatitude = this.location.latitude,
         locationLongitude = this.location.longitude,
-        locationName = this.locationName
+        locationName = this.locationName,
+        imageUri = this.imageUri
     )
 }

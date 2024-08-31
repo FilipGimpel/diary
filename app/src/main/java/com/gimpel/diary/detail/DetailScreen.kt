@@ -2,8 +2,12 @@ package com.gimpel.diary.detail
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.result.launch
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -15,6 +19,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Save
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -29,7 +34,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
@@ -37,7 +44,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import coil.compose.rememberAsyncImagePainter
 import com.gimpel.diary.R
 import com.gimpel.diary.data.DiaryEntry
 
@@ -84,7 +93,11 @@ fun DetailScreen(
         onSaveClick = {
             viewModel.saveCurrentEntry()
             navController.popBackStack()
-        })
+        },
+        onImageCaptured = { bitmap ->
+            viewModel.uploadBitmap(bitmap)
+        }// todo delete old picture from firebase if we add new
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -95,7 +108,15 @@ fun DetailContent(
     onContentChange: (String) -> Unit,
     onBackClick: () -> Unit,
     onSaveClick: () -> Unit,
+    onImageCaptured: (Bitmap) -> Unit
 ) {
+    var capturedBitmap by remember { mutableStateOf<Bitmap?>(null) }
+
+    val takePictureLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.TakePicturePreview()
+    ) { bitmap: Bitmap? ->
+        onImageCaptured(bitmap!!)
+    }
 
     Scaffold(topBar = {
         TopAppBar(title = {
@@ -117,6 +138,8 @@ fun DetailContent(
             }
         })
     }, content = { paddingValues ->
+
+
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -137,8 +160,25 @@ fun DetailContent(
                 label = { Text(text = "Enter your diary entry content") },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .weight(1f)
+                    .weight(9f)
             )
+            Spacer(modifier = Modifier.height(8.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth().weight(1f),
+                horizontalArrangement = Arrangement.SpaceBetween, // Distribute space between items
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+
+                Image(
+                    modifier = Modifier.weight(1f), // Allow image to occupy available space
+                    painter = rememberAsyncImagePainter(model = uiState.imageUri),
+                    contentDescription = "Captured Image"
+                )
+
+                Button(onClick = { takePictureLauncher.launch() }) {
+                    if ( uiState.imageUri.isEmpty()) Text("Take Picture") else Text("Retake Picture")
+                } // todo delete picture button
+            }
             Spacer(modifier = Modifier.height(8.dp))
             Row {
                 Icon(Icons.Filled.LocationOn, contentDescription = null, modifier = Modifier.padding(end = 8.dp))
@@ -164,6 +204,7 @@ fun PreviewDetailScreen() {
         onBackClick = { },
         onSaveClick = { },
         onTitleChange = { },
-        onContentChange = { }
+        onContentChange = { },
+        onImageCaptured = { }
     )
 }
